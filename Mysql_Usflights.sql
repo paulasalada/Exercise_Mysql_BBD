@@ -13,7 +13,8 @@ group by origin;
 group by origin,month,year;
 //4.	Retard promig d’arribada dels vols, per mesos i segons l’aeroport origen (mateixa consulta que abans i amb el mateix ordre). Però a més, ara volen que en comptes del codi de l’aeroport es mostri el nom de la ciutat.
 		Los Angeles, 2000, 01, retard;
-SELECT a.Origin, b.airport, month,year, avg(DepDelay) as Avg_DepDelay , 
+		
+SELECT b.airport, month,year, avg(DepDelay) as Avg_DepDelay , 
   avg(ArrDelay) as Avg_ArrDelay
 FROM usflights.flights a
 LEFT JOIN usflights.airports b ON a.Origin = b.iata
@@ -42,4 +43,5 @@ arriben al seu destí amb un retràs promig major de 10 minuts;
 SELECT UniqueCarrier, avg(ArrDelay)
 FROM flights
 GROUP BY UniqueCarrier
-HAVING avg(ArrDelay)>10;
+HAVING avg(ArrDelay)>10
+ORDER BY avg(ArrDelay) DESC;
